@@ -36,10 +36,7 @@ jobs:
           sudo apt-get install -y ninja-build
           vcpkg install boost-system:arm64-android boost-filesystem:arm64-android boost-program-options:arm64-android boost-icl:arm64-android boost-variant:arm64-android openssl:arm64-android zlib:arm64-android
 
-      - name: Decode Keystore
-        env:
-          KEYSTORE_ENCODED: ${{ secrets.KEYSTORE }}
-        run: echo $KEYSTORE_ENCODED | base64 --decode > "/home/runner/keystore.jks"
+      
 
 #      - name: Setup Android NDK
 #        uses: nttld/setup-ndk@v1.5.0
@@ -49,11 +46,6 @@ jobs:
 #             link-to-sdk: true
              
       - name: Gradle build
-        env:
-          SIGNING_STORE_PATH: "/home/runner/keystore.jks"
-          SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-          SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: |
           bash -c "yes || Yes || true" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null
           
