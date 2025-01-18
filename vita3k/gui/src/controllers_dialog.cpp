@@ -180,7 +180,7 @@ void draw_controllers_dialog(GuiState &gui, EmuEnvState &emuenv) {
     auto &lang = gui.lang.controllers;
     auto &common = emuenv.common_dialog.lang.common;
 
-    const auto has_controllers = ctrl.controllers_num > 0;
+    const auto has_controllers = true;
 
     if (has_controllers)
         ImGui::SetNextWindowSize(ImVec2(VIEWPORT_SIZE.x / 2.5f, 0), ImGuiCond_Always);
